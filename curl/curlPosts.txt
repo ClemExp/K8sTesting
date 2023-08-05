@@ -1,0 +1,1 @@
+curl --data "name=aaa&email=aaa.aaaa.com&subject=1&motivational_letter=textSentFromCurl" https://tlsoff.clemoregan.com/
