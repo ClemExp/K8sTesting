@@ -6,7 +6,7 @@ export const options = {
 };
 
 export default function () {
-  var domain = 'https://tlsoff.clemoregan.com/';
+  var domain = 'https://tlson.clemoregan.com/';
   let res = http.get(domain);
   // Check: valid response & ciphers used
   // Note: https://k6.io/docs/using-k6/protocols/ssl-tls/ssl-tls-version-and-ciphers/

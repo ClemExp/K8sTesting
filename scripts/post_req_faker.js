@@ -8,7 +8,7 @@ export const options = {
 };
 
 export default function () {
-  const url = 'https://tlsoff.clemoregan.com/'; // Replace with the actual URL of the PHP application
+  const url = 'https://tlson.clemoregan.com/'; // Replace with the actual URL of the PHP application
   const randomFirstName = randomString(8);
   const randomLastName = randomString(8);
   const payload = {
