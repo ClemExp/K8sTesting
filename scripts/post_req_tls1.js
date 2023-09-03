@@ -1,18 +1,25 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
+import { randomString } from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
 
 export const options = {
   // following TLS1.3 3 cipher suites are supported by server certificates
   tlsCipherSuites: ['TLS_AES_256_GCM_SHA384', 'TLS_AES_128_GCM_SHA256', 'TLS_CHACHA20_POLY1305_SHA256'],
+  // 1.2 ciphers with k6 - 
+  //     TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+  //tlsVersion: http.TLS_1_2,
+  //tlsCipherSuites: ['TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305'],
 };
 
 export default function () {
-  const url = 'https://tlsoff.clemoregan.com/'; // Replace with the actual URL of the PHP application
+  const url = 'https://tlson.clemoregan.com/'; // Replace with the actual URL of the PHP application
+  const randomFirstName = randomString(8);
+  const randomLastName = randomString(8);
   const payload = {
-      name: 'bbb bbbb',
-      email: 'bbb.bbbb.com',
-      subject: '3',
-      motivational_letter: 'text Sent From K6s',
+    name: `${randomFirstName} ${randomLastName}`,
+    email: `${randomFirstName}_${randomLastName}@uc3m.es`,
+    subject: randomString(1, '1234'),
+    motivational_letter: randomString(2000),
   };
 
   const headers = {
@@ -25,12 +32,12 @@ export default function () {
 
   const response = http.post(url, data, { headers });
 
-  console.log(`Response status: ${response.status}`);
-  console.log(`Response body: ${response.body}`);
+  //console.log(`Response status: ${response.status}`);
+  //console.log(`Response body: ${response.body}`);
 
   check (response, {
     'is status code 200': (r) => r.status === 200,
-    'is TLSv1.3': (r) => r.tls_version === http.TLS_1_3,
+    'is TLSv1.2': (r) => r.tls_version === http.TLS_1_2,
     'is sha256 cipher suite': (r) => r.tls_cipher_suite === 'TLS_AES_128_GCM_SHA256',
   });
 
