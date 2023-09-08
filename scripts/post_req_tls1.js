@@ -12,14 +12,14 @@ export const options = {
 };
 
 export default function () {
-  const url = 'https://tlson.clemoregan.com/'; // Replace with the actual URL of the PHP application
+  const url = 'https://tlsoff.clemoregan.com/'; // Replace with the actual URL of the PHP application
   const randomFirstName = randomString(8);
   const randomLastName = randomString(8);
   const payload = {
     name: `${randomFirstName} ${randomLastName}`,
     email: `${randomFirstName}_${randomLastName}@uc3m.es`,
     subject: randomString(1, '1234'),
-    motivational_letter: randomString(2000),
+    motivational_letter: randomString(4000),
   };
 
   const headers = {
