@@ -4,15 +4,15 @@ import { randomString } from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
 
 export const options = {
   // following TLS1.3 3 cipher suites are supported by server certificates
-  tlsCipherSuites: ['TLS_AES_256_GCM_SHA384', 'TLS_AES_128_GCM_SHA256', 'TLS_CHACHA20_POLY1305_SHA256'],
+  //tlsCipherSuites: ['TLS_AES_256_GCM_SHA384', 'TLS_AES_128_GCM_SHA256', 'TLS_CHACHA20_POLY1305_SHA256'],
   // 1.2 ciphers with k6 - 
   //     TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
-  //tlsVersion: http.TLS_1_2,
-  //tlsCipherSuites: ['TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305'],
+  tlsVersion: http.TLS_1_3,
+  tlsCipherSuites: ['TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305'],
 };
 
 export default function () {
-  const url = 'https://tlsoff.clemoregan.com/'; // Replace with the actual URL of the PHP application
+  const url = 'https://tlson.clemoregan.com/'; // Replace with the actual URL of the PHP application
   const randomFirstName = randomString(8);
   const randomLastName = randomString(8);
   const payload = {
